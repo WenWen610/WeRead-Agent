@@ -1,0 +1,1 @@
+"""WeRead persistence stores."""

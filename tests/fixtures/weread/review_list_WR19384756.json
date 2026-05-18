@@ -1,0 +1,24 @@
+{
+  "reviews": [
+    {
+      "review": {
+        "reviewId": "rv_001",
+        "chapterUid": 1,
+        "content": "这段描写太震撼了，人类在宇宙面前的渺小感扑面而来。",
+        "type": 1,
+        "createTime": 1609459300,
+        "range": "10-20"
+      }
+    },
+    {
+      "review": {
+        "reviewId": "rv_002",
+        "chapterUid": 3,
+        "content": "黑暗森林法则的提出改变了整个故事的格局，非常精妙。",
+        "type": 1,
+        "createTime": 1609545700,
+        "range": "50-60"
+      }
+    }
+  ]
+}

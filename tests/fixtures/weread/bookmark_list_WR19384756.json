@@ -1,0 +1,35 @@
+{
+  "synckey": 789012,
+  "updated": [
+    {
+      "markText": "给岁月以文明，而不是给文明以岁月。",
+      "chapterUid": 1,
+      "chapterName": "第一章",
+      "createTime": 1609459200,
+      "type": 1,
+      "colorStyle": 1,
+      "range": "10-20",
+      "bookId": "WR19384756"
+    },
+    {
+      "markText": "宇宙就是一座黑暗森林，每个文明都是带枪的猎人。",
+      "chapterUid": 3,
+      "chapterName": "第三章",
+      "createTime": 1609545600,
+      "type": 1,
+      "colorStyle": 1,
+      "range": "50-60",
+      "bookId": "WR19384756"
+    },
+    {
+      "markText": "弱小和无知不是生存的障碍，傲慢才是。",
+      "chapterUid": 5,
+      "chapterName": "第五章",
+      "createTime": 1609632000,
+      "type": 1,
+      "colorStyle": 2,
+      "range": "80-90",
+      "bookId": "WR19384756"
+    }
+  ]
+}

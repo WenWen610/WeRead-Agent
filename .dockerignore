@@ -1,0 +1,15 @@
+.venv
+__pycache__
+*.pyc
+.git
+.gitignore
+.env
+.env.*
+*.md
+LICENSE
+ruff_cache
+.pytest_cache
+docs
+evals
+grafana
+prometheus

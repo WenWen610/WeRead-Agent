@@ -1,0 +1,29 @@
+{
+  "pureBookCount": 2,
+  "bookCount": 2,
+  "bookProgress": [
+    {
+      "bookId": "WR19384756",
+      "progress": 45,
+      "chapterUid": 6,
+      "chapterOffset": 1200,
+      "chapterIdx": 6,
+      "appId": "",
+      "updateTime": 1609632000,
+      "readingTime": 3600,
+      "synckey": 789012
+    },
+    {
+      "bookId": "FAKE002",
+      "progress": 100,
+      "chapterUid": 1,
+      "chapterOffset": 0,
+      "chapterIdx": 1,
+      "appId": "",
+      "updateTime": 1600000000,
+      "readingTime": 7200,
+      "synckey": 123456
+    }
+  ],
+  "archive": []
+}

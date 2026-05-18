@@ -1,0 +1,32 @@
+{
+  "synckey": 789012,
+  "totalBookCount": 1,
+  "noBookReviewCount": 0,
+  "books": [
+    {
+      "bookId": "WR19384756",
+      "book": {
+        "bookId": "WR19384756",
+        "title": "三体",
+        "author": "刘慈欣",
+        "cover": "https://weread.qq.com/cover/WR19384756",
+        "version": 1,
+        "format": "epub",
+        "type": 0,
+        "publishTime": "2008-01",
+        "publisher": "重庆出版社",
+        "isbn": "9787536692930",
+        "category": "科幻小说",
+        "categories": [
+          {"categoryId": 1, "subCategoryId": 101, "title": "科幻小说"}
+        ],
+        "intro": "文化大革命如火如荼进行的同时，军方探寻外星文明的绝秘计划红岸工程取得了突破性进展。",
+        "totalWords": 200000
+      },
+      "sortIdx": 1,
+      "noteCount": 3,
+      "reviewCount": 2,
+      "highlightCount": 3
+    }
+  ]
+}

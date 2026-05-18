@@ -1,0 +1,56 @@
+{
+  "data": [
+    {
+      "updated": [
+        {
+          "chapterUid": 1,
+          "chapterIdx": 1,
+          "updateTime": 1683825006,
+          "readAhead": 0,
+          "title": "第一章 疯狂年代",
+          "level": 1
+        },
+        {
+          "chapterUid": 2,
+          "chapterIdx": 2,
+          "updateTime": 1683825006,
+          "readAhead": 0,
+          "title": "第二章 寂静的春天",
+          "level": 1
+        },
+        {
+          "chapterUid": 3,
+          "chapterIdx": 3,
+          "updateTime": 1683825006,
+          "readAhead": 0,
+          "title": "第三章 红岸之一",
+          "level": 1
+        },
+        {
+          "chapterUid": 4,
+          "chapterIdx": 4,
+          "updateTime": 1683825006,
+          "readAhead": 0,
+          "title": "第四章 红岸之二",
+          "level": 1
+        },
+        {
+          "chapterUid": 5,
+          "chapterIdx": 5,
+          "updateTime": 1683825006,
+          "readAhead": 0,
+          "title": "第五章 红岸之三",
+          "level": 1
+        },
+        {
+          "chapterUid": 6,
+          "chapterIdx": 6,
+          "updateTime": 1683825006,
+          "readAhead": 0,
+          "title": "第六章 宇宙社会学",
+          "level": 1
+        }
+      ]
+    }
+  ]
+}

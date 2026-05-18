@@ -1,0 +1,62 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+*.jsonl
+*.db
+*.db-wal
+*.db-shm
+.coverage
+.coverage.*
+htmlcov/
+
+# Virtual environments
+.venv
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.development.local
+.env.staging
+.env.staging.local
+.env.production
+.env.production.local
+.env.test
+
+# Misc
+*.ipynb
+*.log
+*.swp
+*.swo
+.DS_Store
+
+# Reports
+evals/reports/
+deep-agent-eval*_dataset.json
+deep-agent-eval*_progress.json
+
+# Tool caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+*.tsbuildinfo
+
+# Runtime logs
+logs/
+data/local_knowledge/
+skills_state.json
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+
+#test
+scripts/smoke.sh
+
+docs/open_source_cleanup.md
+data/weixin/account.json
+data/*
