@@ -1,25 +1,17 @@
 # WeRead Agent
 
-微信读书 AI 助手 —— 支持自然语言检索书籍笔记、主题分析与长期阅读记忆管理，并接入 Web / QQ / 微信多端对话。
+微信读书 AI 阅读助手 —— 支持自然语言检索书籍笔记、主题分析、归纳笔记、长期阅读记忆管理，并接入 Web / 微信 / QQ多端对话。
 
-## 支持功能
-- 扫码登录，用于获取个人微信读书相关数据
+## 功能展示
+- Web端导出划线笔记(自然语言提问——>对话中扫码登录（或侧边栏提前登录）——>对话展示文档、笔记存档归纳)
+  <p align="center">
+  <video src="https://github.com/user-attachments/assets/d6237b90-1d1c-4751-bcf1-a2f7af50d9f4" controls width="400"></video>
+  </p>
+
+- 微信端对话(侧边栏扫码绑定bot——>微信对话提问——>消息回复（web端同步）)
     <p align="center">
-     <img src="./docs/images/web_qrcode.png" alt="Web UI" width="80%">
-    <p>
-- 用自然语言让助手导出笔记
-  - 输入自然语言
-    <p align="center">
-      <img src="./docs/images/web_exportmd.png" alt="Web UI" width="80%">
-    <p>
-  - 笔记展示与归纳
-    <p>
-     <img src="./docs/images/resources_marks.png" alt="Web UI" width="80%">
-    <p>
-- 微信端对话
-    <p align="center">
-     <img src="./docs/images/wechat_channel.png" alt="Web UI" width="30%">
-    <p>
+  <video src="https://github.com/user-attachments/assets/4a928b21-2e5b-49cd-a375-e77d5c388e15" controls width="400"></video>
+   </p>
 
 ## 快速开始（Docker）
 
@@ -28,9 +20,8 @@ git clone https://github.com/WenWen610/WeRead-Agent.git
 cd weread-agent
 cp .env.example .env.development
 # 编辑 .env.development，至少填写：
-#   JWT_SECRET_KEY=<随机生成的密钥>
-#   LLM_PROVIDER=openai  （或 deepseek）
-#   OPENAI_API_KEY=<你的 API key>  （或 DEEPSEEK_API_KEY）
+#   LLM_PROVIDER=deepseek  （或 openai）
+#   DEEPSEEK_API_KE=<你的 API key>  （或 YOPENAI_API_KEY）
 make docker-compose-up ENV=development
 ```
 
