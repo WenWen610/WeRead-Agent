@@ -237,13 +237,16 @@ button {
 }
 
 .binding-qr {
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 10px;
-  justify-items: center;
   padding: 14px;
   border-radius: 12px;
   background: var(--bg-elevated);
   border: 1px solid var(--line);
+  width: fit-content;
+  margin: 0 auto;
 }
 
 .binding-qr img {
@@ -517,26 +520,93 @@ button {
   background: var(--bg-elevated);
   border: 1px solid var(--line);
   color: var(--ink);
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.artifact-preview-content h1,
+.artifact-preview-content h2,
+.artifact-preview-content h3,
+.artifact-preview-content h4 {
+  margin: 1.25em 0 0.5em;
+}
+
+.artifact-preview-content h1:first-child,
+.artifact-preview-content h2:first-child,
+.artifact-preview-content h3:first-child,
+.artifact-preview-content h4:first-child {
+  margin-top: 0;
+}
+
+.artifact-preview-content p {
+  margin: 0 0 0.75em;
+}
+
+.artifact-preview-content ul,
+.artifact-preview-content ol {
+  padding-left: 1.5em;
+  margin: 0 0 0.75em;
+}
+
+.artifact-preview-content li {
+  margin-bottom: 0.25em;
+}
+
+.artifact-preview-content code {
   font-family: "IBM Plex Mono", "SFMono-Regular", monospace;
   font-size: 13px;
-  line-height: 1.65;
-  white-space: pre-wrap;
+  background: var(--bg);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.artifact-preview-content pre {
+  margin: 0 0 0.75em;
+  padding: 14px;
+  border-radius: 8px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  overflow: auto;
+  font-family: "IBM Plex Mono", "SFMono-Regular", monospace;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.artifact-preview-content pre code {
+  background: none;
+  padding: 0;
+  border-radius: 0;
+  font-size: inherit;
+}
+
+.artifact-preview-content blockquote {
+  margin: 0 0 0.75em;
+  padding-left: 12px;
+  border-left: 3px solid var(--line);
+  color: var(--muted);
+}
+
+.artifact-preview-content hr {
+  border: none;
+  border-top: 1px solid var(--line);
+  margin: 1.5em 0;
 }
 
 .timeline-item {
   display: flex;
   flex-direction: column;
   max-width: 70%;
-  width: fit-content;
 }
 
 .item-user {
   align-self: flex-end;
+  width: fit-content;
 }
 
 .item-assistant {
   align-self: flex-start;
   max-width: 100%;
+  width: 100%;
 }
 
 .item-label {

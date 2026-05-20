@@ -431,6 +431,7 @@ export type ChannelStatus = {
   name: string;
   running: boolean;
   has_token: boolean;
+  user_bound: boolean;
 };
 
 export async function startWeixinLogin(sessionToken: string): Promise<WeixinLoginResponse> {

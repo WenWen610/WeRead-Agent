@@ -105,6 +105,20 @@ export function useWeReadBinding(authState: AuthState | null) {
     };
   }, [authState, qrLoginSession, refreshBinding]);
 
+  const startPollingFromSession = useCallback((session_id: string) => {
+    const now = new Date().toISOString();
+    setQrLoginSession({
+      session_id,
+      status: "qr_ready",
+      qr_image_base64: null,
+      last_error: null,
+      expires_at: new Date(Date.now() + 180000).toISOString(),
+      created_at: now,
+      updated_at: now,
+      completed_at: null,
+    });
+  }, []);
+
   const handleStartQrLogin = useCallback(async () => {
     if (!authState || isStartingQrLogin) return;
     setIsStartingQrLogin(true);
@@ -168,5 +182,6 @@ export function useWeReadBinding(authState: AuthState | null) {
     handleCancelQrLogin,
     handleClearBinding,
     handleValidateBinding,
+    startPollingFromSession,
   };
 }

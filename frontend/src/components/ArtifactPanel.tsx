@@ -1,4 +1,6 @@
 import type { WeReadArtifact } from "../types";
+import ReactMarkdown from "react-markdown";
+import type { Components } from "react-markdown";
 
 function formatTimestamp(value: string | null): string {
   if (!value) return "";
@@ -98,7 +100,9 @@ export function ArtifactPanel({
           ) : artifactPreviewError ? (
             <div className="binding-error">{artifactPreviewError}</div>
           ) : (
-            <pre className="artifact-preview-content">{artifactPreview}</pre>
+            <div className="artifact-preview-content">
+              <ReactMarkdown>{artifactPreview}</ReactMarkdown>
+            </div>
           )}
         </article>
       ) : null}

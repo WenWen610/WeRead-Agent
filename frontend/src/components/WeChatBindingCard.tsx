@@ -15,17 +15,17 @@ type Props = {
 
 function statusLabel(channel: ChannelStatus | null, isPolling: boolean): string {
   if (isPolling) return "等待扫码...";
-  if (!channel) return "未配置";
-  if (channel.running) return "运行中";
-  if (channel.has_token) return "已授权（未运行）";
+  if (!channel || !channel.has_token) return "未配置";
+  if (channel.user_bound && channel.running) return "运行中";
+  if (channel.user_bound) return "已绑定（未运行）";
   return "未连接";
 }
 
 function statusTone(channel: ChannelStatus | null, isPolling: boolean): string {
   if (isPolling) return "warning";
-  if (!channel) return "muted";
-  if (channel.running) return "active";
-  if (channel.has_token) return "warning";
+  if (!channel || !channel.has_token) return "muted";
+  if (channel.user_bound && channel.running) return "active";
+  if (channel.user_bound) return "warning";
   return "muted";
 }
 
@@ -82,6 +82,9 @@ export function WeChatBindingCard({
           {channel?.has_token && channel?.running ? (
             <div className="binding-note">Bot 已连接，可通过微信发送消息与 AI 对话。</div>
           ) : null}
+          {channel?.user_bound && !channel?.running ? (
+            <div className="binding-note">已绑定微信，启动 Bot 后即可对话。</div>
+          ) : null}
           <div className="binding-actions">
             {isPolling || qrData ? (
               <button className="ghost-button" onClick={onCancelQrLogin} type="button">
@@ -94,7 +97,7 @@ export function WeChatBindingCard({
                 type="button"
                 disabled={isGeneratingQr}
               >
-                {isGeneratingQr ? "生成中..." : channel?.has_token ? "重新授权" : "扫码连接"}
+                {isGeneratingQr ? "生成中..." : channel?.user_bound ? "重新授权" : "扫码连接"}
               </button>
             )}
             {channel?.has_token && !channel?.running ? (

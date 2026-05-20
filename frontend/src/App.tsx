@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createThread, getWeReadDocumentBlob, getWeReadDocumentPreview, listThreadItems, listThreadArtifacts } from "./api";
 import type { WeReadArtifact } from "./types";
 import { useAuth } from "./hooks/useAuth";
@@ -35,6 +35,12 @@ function App() {
 
   const wechat = useWeChatChannel(auth.authState, ensureThread);
   const resources = useResources(auth.authState?.sessionToken ?? "");
+
+  useEffect(() => {
+    if (weread.wereadBinding?.connected && resources.loadTree) {
+      void resources.loadTree();
+    }
+  }, [weread.wereadBinding?.connected]);
 
   const [artifactPreview, setArtifactPreview] = useState("");
   const [artifactPreviewError, setArtifactPreviewError] = useState("");
@@ -86,6 +92,48 @@ function App() {
       ),
     [timelineItems],
   );
+
+  const lastUserMessageRef = useRef("");
+  const qrSessionActiveRef = useRef(false);
+  const polledSessionRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    const userItems = timelineItems.filter((i) => i.item_type === "user");
+    if (userItems.length > 0) {
+      lastUserMessageRef.current = userItems[userItems.length - 1].content;
+    }
+  }, [timelineItems]);
+
+  useEffect(() => {
+    const qrArtifact = activeArtifacts.find((a) => a.kind === "weread_qr_code" && a.session_id);
+    if (qrArtifact?.session_id && qrArtifact.session_id !== polledSessionRef.current) {
+      polledSessionRef.current = qrArtifact.session_id;
+      weread.startPollingFromSession(qrArtifact.session_id);
+      qrSessionActiveRef.current = true;
+    }
+  }, [activeArtifacts]);
+
+  useEffect(() => {
+    if (weread.wereadBinding?.connected && qrSessionActiveRef.current && lastUserMessageRef.current) {
+      qrSessionActiveRef.current = false;
+      polledSessionRef.current = null;
+      void handleSendMessage(lastUserMessageRef.current);
+    }
+  }, [weread.wereadBinding?.connected]);
+
+  useEffect(() => {
+    if (!auth.authState || !threads.activeThreadId || !wechat.channel?.running) return;
+
+    const id = setInterval(async () => {
+      if (isSubmitting || toolCallActive) return;
+      try {
+        const items = await listThreadItems(auth.authState!.sessionToken, threads.activeThreadId!);
+        setTimelineItems((prev) => (items.length > prev.length ? items : prev));
+      } catch { /* silently ignore polling errors */ }
+    }, 10000);
+
+    return () => clearInterval(id);
+  }, [auth.authState, threads.activeThreadId, isSubmitting, toolCallActive, wechat.channel?.running]);
 
   useEffect(() => {
     if (!auth.authState || !threads.activeThreadId) {
@@ -282,18 +330,6 @@ function App() {
         </header>
 
         <section className="timeline">
-          <ArtifactPanel
-            artifacts={activeArtifacts}
-            selectedArtifact={selectedArtifact}
-            artifactPreview={artifactPreview}
-            artifactPreviewError={artifactPreviewError}
-            artifactListError={artifactListError}
-            isArtifactLoading={isArtifactLoading}
-            onSelectArtifact={setSelectedArtifact}
-            onOpenArtifact={handleOpenArtifact}
-            onDownloadArtifact={handleDownloadArtifact}
-          />
-
           {timelineItems.length === 0 && !streamingAssistant ? (
             <div className="empty-state">
               <h3>和微信读书助手聊一聊</h3>
@@ -338,6 +374,18 @@ function App() {
               onSendOption={handleSendMessage}
             />
           ) : null}
+
+          <ArtifactPanel
+            artifacts={activeArtifacts}
+            selectedArtifact={selectedArtifact}
+            artifactPreview={artifactPreview}
+            artifactPreviewError={artifactPreviewError}
+            artifactListError={artifactListError}
+            isArtifactLoading={isArtifactLoading}
+            onSelectArtifact={setSelectedArtifact}
+            onOpenArtifact={handleOpenArtifact}
+            onDownloadArtifact={handleDownloadArtifact}
+          />
         </section>
 
         <Composer

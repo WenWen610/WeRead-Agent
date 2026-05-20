@@ -74,6 +74,7 @@ class ChannelStatusResponse(BaseModel):
     name: str
     running: bool
     has_token: bool
+    user_bound: bool = False
 
 
 # ── Routes ────────────────────────────────────────────────────────────────
@@ -81,14 +82,19 @@ class ChannelStatusResponse(BaseModel):
 
 @router.get("/status", response_model=list[ChannelStatusResponse])
 @limiter.limit("30/minute")
-async def list_channels(request: Request):
+async def list_channels(request: Request, session: Session = Depends(get_current_session)):
     """Return status of all configured channels."""
     if _channel_manager is None:
         return []
     result = []
     for name, ch in _channel_manager.get_channels().items():
+        user_bound = False
+        if name == "weixin" and ch.has_token:
+            user_bound = await weixin_binding_store.get_binding_by_user_id(session.user_id) is not None
         result.append(
-            ChannelStatusResponse(name=name, running=ch.running, has_token=ch.has_token)
+            ChannelStatusResponse(
+                name=name, running=ch.running, has_token=ch.has_token, user_bound=user_bound,
+            )
         )
     return result
 
@@ -179,7 +185,7 @@ def _qq_channel():
 async def get_qq_status(request: Request):
     """Return QQ channel status."""
     ch = _qq_channel()
-    return ChannelStatusResponse(name=ch.name, running=ch.running, has_token=ch.has_token)
+    return ChannelStatusResponse(name=ch.name, running=ch.running, has_token=ch.has_token, user_bound=False)
 
 
 @router.post("/qq/start")

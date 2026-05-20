@@ -50,6 +50,10 @@ class WeixinBindingStore:
             )
             return binding
 
+    async def get_binding_by_user_id(self, user_id: int) -> WeixinBinding | None:
+        with self.db_service.get_session_maker() as session:
+            return session.query(WeixinBinding).filter(WeixinBinding.user_id == user_id).first()
+
     async def get_binding(self, openid: str) -> WeixinBinding | None:
         """Fetch the binding for an exact WeChat openid."""
         normalized_openid = openid.strip()
